@@ -5,12 +5,15 @@ Vagrant.configure(2) do |config|
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine.
+  # Access AtoM at http://localhost:8080
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--memory", '4096']
+
+    # comment these two lines out if CPU only has one core
     vb.customize ["modifyvm", :id, "--cpus", '2']
     vb.customize ["modifyvm", :id, "--ioapic", "on"]
   end
@@ -23,15 +26,16 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :chef_solo do |chef|
 
+    # configuration for AtoM, should fold some of these attributes into the default recipe.
     chef.json = {
       "elasticsearch" => {
-        "version" => "1.5.2" # latest elastic search version, cookbook specifies "0.90.12"
+        "version" => "1.5.2" # latest Elasticsearch version, AtoM requires ~>1.3.0
       },
       "java" => {
-        "install_flavor" => "openjdk",
+        "install_flavor" => "openjdk", # Need Java for Elasticsearch
         "jdk_version" => 7
       },
-      "nodejs" => { # required to compile main.css
+      "nodejs" => { # required to compile .less files
         "npm_packages" => [
           { "name" => "less" },
           { "name" => "gulp" }
@@ -39,6 +43,9 @@ Vagrant.configure(2) do |config|
       }
     }
 
+    # These should be folded into the default recipe
+    # we should end up with just
+    # chef.add_recipe 'atom'
     chef.add_recipe 'nodejs'
     chef.add_recipe 'atom::install_mysql'
     chef.add_recipe 'java'
