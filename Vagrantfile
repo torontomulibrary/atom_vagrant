@@ -25,35 +25,6 @@ Vagrant.configure(2) do |config|
   config.omnibus.chef_version = '12.3.0'
 
   config.vm.provision :chef_solo do |chef|
-
-    # configuration for AtoM, should fold some of these attributes into the default recipe.
-    chef.json = {
-      "elasticsearch" => {
-        "version" => "1.5.2" # latest Elasticsearch version, AtoM requires ~>1.3.0
-      },
-      "java" => {
-        "install_flavor" => "openjdk", # Need Java for Elasticsearch
-        "jdk_version" => 7
-      },
-      "nodejs" => { # required to compile .less files
-        "npm_packages" => [
-          { "name" => "less" },
-          { "name" => "gulp" }
-        ]
-      }
-    }
-
-    # These should be folded into the default recipe
-    # we should end up with just
-    # chef.add_recipe 'atom'
-    chef.add_recipe 'nodejs'
-    chef.add_recipe 'atom::install_mysql'
-    chef.add_recipe 'java'
-    chef.add_recipe 'elasticsearch'
-    chef.add_recipe 'apache2'
-    chef.add_recipe 'php'
-    chef.add_recipe 'php::module_mysql'
-    chef.add_recipe 'apache2::mod_php5'
     chef.add_recipe 'atom'
   end
 end
