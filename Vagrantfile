@@ -25,6 +25,12 @@ Vagrant.configure(2) do |config|
   config.omnibus.chef_version = '12.3.0'
 
   config.vm.provision :chef_solo do |chef|
+    chef.json = {
+      "atom" => {
+        "git_repo" => "git://github.com/newbkaek/atom.git",
+        "git_revision" => 'RULA/2.1.x'
+      }
+    }
     chef.add_recipe 'atom'
   end
 end
