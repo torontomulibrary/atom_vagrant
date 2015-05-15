@@ -1,6 +1,6 @@
 AtoM Vagrant
 =============
-This will create a Vagrant environment with AtoM installed.
+This will create a Vagrant environment with AtoM installed on a Fedora20 box
 
 
 Requirements
