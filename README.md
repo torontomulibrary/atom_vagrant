@@ -1,11 +1,13 @@
 AtoM Vagrant
 =============
-This will create a Vagrant environment with AtoM installed on a Fedora20 box
+This will create a Vagrant environment with [AtoM](https://www.accesstomemory.org/) installed on a Fedora20 box.
 
+This Vagrant configuration uses Chef to provision the VM using [atom_cookbook](https://github.com/newbkaek/atom_cookbook).
 
 Requirements
 ------------
 * [ChefDK](https://downloads.chef.io/chef-dk/)
+* [VirtualBox](https://www.virtualbox.org/)
 * [Vagrant](https://vagrantup.com)
 * vagrant-berkshelf plugin
 * vagrant-omnibus plugin
