@@ -25,6 +25,7 @@ Vagrant.configure(2) do |config|
   config.omnibus.chef_version = '12.3.0'
 
   config.vm.provision :chef_solo do |chef|
+    # Configure how AtoM is installed
     chef.json = {
       "atom" => {
         "git_repo" => "git://github.com/newbkaek/atom.git",
