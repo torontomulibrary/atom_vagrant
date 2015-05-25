@@ -7,6 +7,7 @@ Vagrant.configure(2) do |config|
   # within the machine from a port on the host machine.
   # Access AtoM at http://localhost:8080
   config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 9200, host: 9200
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
