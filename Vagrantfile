@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
     # Configure how AtoM is installed
     chef.json = {
       "atom" => {
-        "git_repo" => "git://github.com/newbkaek/atom.git",
+        "git_repo" => "https://github.com/newbkaek/atom.git",
         "git_revision" => 'RULA/2.1.x'
       }
     }
