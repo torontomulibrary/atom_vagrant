@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
     chef.json = {
       "atom" => {
         "git_repo" => "https://github.com/ryersonlibrary/atom.git",
-        "git_revision" => 'RULA/2.1.x'
+        "git_revision" => 'RULA/2.2.x'
       }
     }
     chef.add_recipe 'atom'
