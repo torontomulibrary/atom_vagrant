@@ -1,7 +1,6 @@
 Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = 'chef/centos-5.11' # CentOS 5.x
   config.vm.box = 'chef/centos-6.6' # CentOS 6.x
 
   # Create a forwarded port mapping which allows access to a specific port
@@ -13,6 +12,7 @@ Vagrant.configure(2) do |config|
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   config.vm.provider 'virtualbox' do |vb|
+    vb.name = 'atom_vagrant'
     vb.customize ['modifyvm', :id, '--memory', '4096']
 
     # comment these two lines out if CPU only has one core
