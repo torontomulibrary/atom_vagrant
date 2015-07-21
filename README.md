@@ -1,6 +1,6 @@
 AtoM Vagrant
 =============
-This will create a Vagrant environment with [AtoM](https://www.accesstomemory.org/) installed on a CentOS 6.6 box.
+This will create a Vagrant environment with [AtoM](https://www.accesstomemory.org/) installed on a CentOS 6.6 or CentOS 7.1 box.
 
 This Vagrant configuration uses Chef to provision the VM using [atom_cookbook](https://github.com/newbkaek/atom_cookbook).
 
@@ -13,7 +13,9 @@ Requirements
 * vagrant-omnibus plugin
 
 ## Platform
-This Vagrant configuration was developed and tested on Ubuntu 14.04 only
+This Vagrant configuration should work on:
+* Ubuntu 14.04
+* Windows 7 / 8 / 8.1
 
 ## Usage
 1. `git clone https://github.com/newbkaek/atom_vagrant`
