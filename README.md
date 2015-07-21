@@ -12,7 +12,7 @@ Requirements
 * vagrant-berkshelf plugin
 * vagrant-omnibus plugin
 
-## Platformls
+## Platform
 This Vagrant configuration should work on:
 * Ubuntu 14.04
 * Windows 7 / 8 / 8.1
