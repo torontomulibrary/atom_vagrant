@@ -19,7 +19,7 @@ This Vagrant configuration *should* work on:
 * Windows 7 / 8 / 8.1 / 10
 
 ## Usage
-1. `git clone https://github.com/ryersonlibrary/atom_vagrant`
+1. `git clone --recursive https://github.com/ryersonlibrary/atom_vagrant`
 2. `cd atom_vagrant`
 3. `vagrant install plugin vagrant-berkshelf` (skip if you already have this plugin installed)
 4. `vagrant install plugin vagrant-omnibus` (skip if you already have this plugin installed)
