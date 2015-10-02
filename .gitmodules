@@ -1,0 +1,3 @@
+[submodule "cookbooks/atom_cookbook"]
+	path = cookbooks/atom_cookbook
+	url = https://github.com/ryersonlibrary/atom_cookbook
