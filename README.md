@@ -24,7 +24,7 @@ This Vagrant configuration *should* work on:
 3. `vagrant install plugin vagrant-berkshelf` (skip if you already have this plugin installed)
 4. `vagrant install plugin vagrant-omnibus` (skip if you already have this plugin installed)
 5. `vagrant up`
-6. Visit http://localhost:8080 on your browser
+6. Visit http://atom.dev on your browser
 
 If you did not change the configuration, this is how you should fill in the fields on the web installer
 * Database name: `atom`
