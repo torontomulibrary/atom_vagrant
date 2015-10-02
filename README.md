@@ -1,8 +1,8 @@
 AtoM Vagrant
 =============
-This will create a Vagrant environment with [AtoM](https://www.accesstomemory.org/) installed on a CentOS 6.6 or CentOS 7.1 box.
+This will create a Vagrant environment with [AtoM](https://www.accesstomemory.org/) installed on a CentOS 7.1 box.
 
-This Vagrant configuration uses Chef to provision the VM using [atom_cookbook](https://github.com/newbkaek/atom_cookbook).
+This Vagrant configuration uses Chef to provision the VM using [atom_cookbook](https://github.com/ryersonlibrary/atom_cookbook).
 
 Requirements
 ------------
@@ -11,11 +11,12 @@ Requirements
 * [Vagrant](https://vagrantup.com)
 * vagrant-berkshelf plugin
 * vagrant-omnibus plugin
+* vagrant-hostsupdater plugin
 
 ## Platform
-This Vagrant configuration should work on:
+This Vagrant configuration *should* work on:
 * Ubuntu 14.04
-* Windows 7 / 8 / 8.1
+* Windows 7 / 8 / 8.1 / 10
 
 ## Usage
 1. `git clone https://github.com/ryersonlibrary/atom_vagrant`
@@ -29,11 +30,19 @@ If you did not change the configuration, this is how you should fill in the fiel
 * Database name: `atom`
 * Database username: `atom`
 * Database password: `atom`
-* Database host: `127.0.0.1`
+* Database host: `localhost`
 * Database port: `3306`
-* Search host: `127.0.0.1`
+* Search host: `localhost`
 * Search port: `9200`
 * Search index: `atom`
 
-## Author
+## Known Issues
+On some Windows hosts the `vagrant-hostsupdater` plugin will not work and you will have to edit your hosts file manually. 
+* Your hosts file *should* be located at `C:\Windows\System32\drivers\etc`.
+* Add this at the bottom your hosts file `192.168.33.10 atom.dev`
+
+If you still have issues accessing your instance from http://atom.dev, try installing the `vagrant-vbguest` plugin.
+
+## Authors
 * Patrick Fung (<patrick@makestuffdostuff.com>)
+* MJ Suhonos (<mjsuhonos@ryerson.ca>)
