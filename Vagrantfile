@@ -1,38 +1,45 @@
 Vagrant.configure(2) do |config|
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = 'chef/centos-6.6' # CentOS 6.x
-  config.vm.box = 'chef/centos-7.1' # CentOS 7.x
+  # Configuration variables for this VM
+  conf = {
+    vm_box: 'bento/centos-7.1', # https://atlas.hashicorp.com/bento/boxes/centos-7.1
+    private_network_ip: '192.168.33.10',
+    vm_hostname: 'atom.dev', # Access our AtoM instance at http://atom.dev
+    vm_memory: 2048,
+    vm_cpus: 2,
+    chefdk_version: '0.8.0'
+  }
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine.
-  # Access AtoM at http://localhost:8080
-  config.vm.network 'forwarded_port', guest: 80, host: 8080
-  config.vm.network 'forwarded_port', guest: 9200, host: 9200
+  config.vm.box = conf[:vm_box]
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  config.vm.provider 'virtualbox' do |vb|
-    vb.name = 'atom_vagrant'
-    vb.customize ['modifyvm', :id, '--memory', '4096']
+  config.ssh.forward_agent = true
+  config.vm.box_check_update = true
 
-    # comment these two lines out if CPU only has one core
-    vb.customize ['modifyvm', :id, '--cpus', '4']
-    vb.customize ['modifyvm', :id, '--ioapic', 'on']
+  config.vm.hostname = conf[:vm_hostname]
+  config.vm.network 'private_network', ip: conf[:private_network_ip]
+
+  if Vagrant.has_plugin?('vagrant-hostsupdater')
+    config.hostsupdater.remove_on_suspend = true
   end
 
-  # Enabling the Berkshelf plugin
-  config.berkshelf.enabled = true
+  config.vm.provider 'virtualbox' do |vb|
+    vb.name = conf[:vm_hostname]
+    vb.memory = conf[:vm_memory]
+    vb.cpus = conf[:vm_cpus]
 
-  # Lock Chef version to 12.3.0 to prevent future issues?
-  config.omnibus.chef_version = '12.3.0'
+    vb.customize ['modifyvm', :id, '--ioapic', 'on'] if conf[:vm_cpus] > 1
+    vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
+    vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+  end
+
+  config.berkshelf.enabled = true # enable berkshelf
+  config.omnibus.chef_version = '12.3.0' # version pin 12.3.0
 
   config.vm.provision :chef_solo do |chef|
-    # Configure how AtoM is installed
     chef.json = {
-      'atom' => {
-        'git_repo' => 'https://github.com/ryersonlibrary/atom.git',
-        'git_revision' => 'RULA/2.2.x'
+      atom: {
+        server_name: conf[:vm_hostname],
+        git_repo: 'https://github.com/ryersonlibrary/atom.git',
+        git_revision: 'RULA/2.2.x'
       }
     }
     chef.add_recipe 'atom'
