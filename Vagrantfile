@@ -4,7 +4,7 @@ Vagrant.configure(2) do |config|
     vm_box: 'bento/centos-7.1', # https://atlas.hashicorp.com/bento/boxes/centos-7.1
     private_network_ip: '192.168.33.10',
     vm_hostname: 'atom.dev', # Access our AtoM instance at http://atom.dev
-    vm_memory: 2048,
+    vm_memory: 4096,
     vm_cpus: 2,
     chefdk_version: '0.8.0'
   }
@@ -39,8 +39,8 @@ Vagrant.configure(2) do |config|
       atom: {
         server_name: conf[:vm_hostname],
         git_repo: 'https://github.com/ryersonlibrary/atom.git',
-        git_revision: 'RULA/2.2.x',
-        vagrant: true
+        git_revision: 'RULA/2.2.x'
+        # vagrant: true
       }
     }
     chef.add_recipe 'atom'
