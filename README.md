@@ -39,6 +39,8 @@ On some Windows hosts the `vagrant-hostsupdater` plugin will not work and you wi
 * Your hosts file *should* be located at `C:\Windows\System32\drivers\etc`.
 * Add this at the bottom your hosts file `192.168.33.10 atom.dev`
 
+On Windows, If you have trouble deleting the www directory that gets created in the vagrant share, try some of the solutions posted [here](http://stackoverflow.com/questions/551072/how-to-delete-a-long-path-in-windows).
+
 ## Authors
 * Patrick Fung (<patrick@makestuffdostuff.com>)
 * MJ Suhonos (<mjsuhonos@ryerson.ca>)
