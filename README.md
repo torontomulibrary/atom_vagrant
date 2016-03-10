@@ -1,6 +1,6 @@
 AtoM Vagrant
 =============
-This will create a Vagrant environment with [AtoM](https://www.accesstomemory.org/) installed on a CentOS 7.1 box.
+This will create a Vagrant environment with [AtoM](https://www.accesstomemory.org/) installed on a CentOS 7.2 box.
 
 This Vagrant configuration uses Chef to provision the VM using [atom_cookbook](https://github.com/ryersonlibrary/atom_cookbook).
 

@@ -1,12 +1,11 @@
 Vagrant.configure(2) do |config|
   # Configuration variables for this VM
   conf = {
-    vm_box: 'bento/centos-7.1', # https://atlas.hashicorp.com/bento/boxes/centos-7.1
+    vm_box: 'bento/centos-7.2', # https://atlas.hashicorp.com/bento/boxes/centos-7.2
     private_network_ip: '192.168.33.10',
     vm_hostname: 'atom.dev', # Access our AtoM instance at http://atom.dev
     vm_memory: 4096,
-    vm_cpus: 2,
-    chefdk_version: '0.8.0'
+    vm_cpus: 2
   }
 
   config.vm.box = conf[:vm_box]
@@ -35,18 +34,12 @@ Vagrant.configure(2) do |config|
   config.omnibus.chef_version = '12.3.0' # version pin 12.3.0
 
   config.vm.provision :chef_solo do |chef|
+    chef.roles_path = 'roles'
     chef.json = {
       atom: {
-        server_name: conf[:vm_hostname],
-        git_repo: 'https://github.com/ryersonlibrary/atom.git',
-        git_revision: 'RULA/2.2.x',
-        config: {
-          factories: {
-            user_timeout: 1800
-          }
-        }
+        server_name: conf[:vm_hostname]
       }
     }
-    chef.add_recipe 'atom'
+    chef.add_role 'atom'
   end
 end

@@ -1,0 +1,16 @@
+{
+  "name": "atom",
+  "description": "Sets up an Access to Memory instance",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "lits_vm": {
+      "components": ["mysql", "nginx", "elasticsearch", "nodejs", "php", "ffmpeg"],
+      "npm_modules": "less gulp",
+      "additional_packages": ["gearmand", "memcached", "ImageMagick", "ghostscript", "poppler-utils", "fop"]
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [ "recipe[lits_vm]", "recipe[atom]" ]
+}
